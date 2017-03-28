@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang = "en-US">
+    <head>
+        {% load static %}
+        <link rel="stylesheet" type="text/css" href="{% static 'story/style.css' %}">
+    
+    </head>
+    <body bgcolor="#b3b3cc">
+        {% if story_sentences %}
+        <ul>
+            <div class="story-css"> 
+
+                <a href="{% url 'story:index'%}">Go Back</a>
+                {% for sentence in story_sentences.sentences.all %}
+
+                <p>{{ sentence }} </p>
+                {% endfor %}
+            </div>
+
+        </ul>
+        <form action="" method="post">
+            {% csrf_token %}
+
+            <div class = "user_input-css">
+                <label for="name"> Name: {{ sentenceForm.user_name }}</label>
+                <label for="sentence_in"> Input: {{ sentenceForm.user_input }}</label>
+                <input type = "submit" value = "Submit"/>
+            </div>
+        </form>
+        {% else %}
+            <div class="story-css"> 
+                <p>Start the story!</p>
+            </div>
+
+            <form action="" method="post">
+            {% csrf_token %}
+
+            <div class = "user_input-css">
+                <label for="name"> Name: {{ sentenceForm.user_name }}</label>
+                <label for="name"> Input: {{ sentenceForm.user_input }}</label>
+                <input type = "submit" value = "Submit"/>
+            </div>
+        </form>
+        {% endif %}
+    </body>
+</html>

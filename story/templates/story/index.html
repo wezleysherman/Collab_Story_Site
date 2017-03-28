@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang = "en-US">
+	<head>
+		{% load static %}
+		<link rel="stylesheet" type="text/css" href="{%static 'story/style.css' %}">
+	</head>
+	<body bgcolor="#b3b3cc">
+		{% if stories_list %}
+			<ul>
+				<div class = "story-css">
+					<h1> Welcome to Story Maker! Click on a story or start your own! </h1>
+					<br><br>
+					<h2> Stories: </h2>
+					{% for story in stories_list %}
+						<p><a href="{% url 'story:story' story.id %}">{{ story.story_title }}</a></p>
+					{% endfor %}
+				</div>
+				<div class = "user_input-css">
+					<form action="" method="post">
+						{% csrf_token %}
+						<label for="new_story"> Story Name: {{ storyForm.story_title }} </label>
+						<input type="submit" value="Create! :)"/>
+					</form>
+				</div>
+			</ul>
+		{% else %}
+			<ul>
+				<div class = "story-css">
+					<h1> Welcome to Story Maker! Click on a story or start your own! </h1>
+					<br><br>
+					<h2> There are no stories! Please create the first one! </h2>
+				</div>
+				<div class = "user_input-css">
+					<form action="" method="post">
+						{% csrf_token %}
+						<label for="new_story"> Story Name: {{ storyForm.story_title }} </label>
+						<input type="submit" value="Create! :)"/>
+					</form>
+				</div>
+			</ul>
+		{% endif %}
+	</body>
+</html>
+
